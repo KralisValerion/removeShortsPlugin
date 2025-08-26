@@ -1,0 +1,16 @@
+{
+    "name": "AntiShortsPlugin",
+    "description": "Плагин, отключающий разделы с шортсами в ютубе",
+    "version": "1.0",
+    "manifest_version": 3,
+    "content_scripts": [
+        {
+            "js": [
+                "script.js"
+            ],
+            "matches": [
+                "https://www.youtube.com/*"
+            ]
+        }
+    ]
+}
