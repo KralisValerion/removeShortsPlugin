@@ -1,13 +1,14 @@
-let finderShortsContainer = setInterval(() => {
-    let shotsContainers = document.querySelectorAll("#dismissible");
-    let shotsSmallContainer = document.querySelector("ytd-reel-shelf-renderer")
-    shotsContainers.forEach((item) => {
-        item.style.display = "none"
-    })
-    if (shotsSmallContainer) {
-        if (shotsSmallContainer.contains(document.querySelector("ytm-shorts-lockup-view-model"))) {
-            shotsSmallContainer.style.display = "none";
+let observer = new MutationObserver((mutationList) => {
+    for (let mutationRecord of mutationList) {
+        for (let node of mutationRecord.addedNodes) {
+            if (node instanceof HTMLElement && node.matches("ytd-rich-section-renderer") || node instanceof HTMLElement && node.matches("ytd-reel-shelf-renderer") || node instanceof HTMLElement && node.matches("grid-shelf-view-model")) {
+                node.style.display = "none";
+            }
         }
     }
+})
 
-}, 3000)
+observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+})
